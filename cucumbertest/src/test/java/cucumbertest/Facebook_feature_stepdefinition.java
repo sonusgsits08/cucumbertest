@@ -2,7 +2,9 @@ package cucumbertest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -12,13 +14,21 @@ public class Facebook_feature_stepdefinition {
    WebDriver driver = null; 
 	
    @Given("^I have open the browser$") 
-   public void openBrowser() { 
-      driver = new FirefoxDriver(); 
+   public void openBrowser() {
+	   //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Anshu\\git\\driver\\chromedriver.exe");
+	   System.setProperty("webdriver.ie.driver", "C:\\Users\\Anshu\\git\\driver\\IEDriverServer.exe");
+	   /*System.setProperty("webdriver.chrome.driver", "C:/Users/Anshu/git/driver/chromedriver.exe");
+	   ChromeOptions options = new ChromeOptions();
+	   options.addArguments("--headless");
+	   options.addArguments("--no-sandbox");
+	   options.addArguments("--disable-dev-shm-usage");
+	   driver = new ChromeDriver(options);*/
+	   driver = new InternetExplorerDriver();
    } 
 	
-   @When("^I open Facebook website$") 
-   public void goToFacebook() { 
-      driver.navigate().to("https://www.facebook.com/"); 
+   @When("^I open \"(.*)\" website$") 
+   public void goToURL(String url) { 
+      driver.navigate().to(url); 
    } 
 	
    @Then("^Login button should exits$") 
